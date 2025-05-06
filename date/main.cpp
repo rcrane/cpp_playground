@@ -5,6 +5,8 @@
 class date
 {
 public:
+    date();
+    date(int, int, int);
     void init();
     void init(int, int, int);
     void print();
@@ -14,6 +16,16 @@ private:
     int month_;
     int year_;
 };
+
+date::date() // <= Definition Konstruktor (1)
+{
+    init();
+}
+
+date::date(int d, int m, int y) // <= Definition Konstruktor (2)
+{
+    init(d, m, y);
+}
 
 void date::init()
 {
