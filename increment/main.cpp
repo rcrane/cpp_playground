@@ -18,7 +18,16 @@ int main() {
     int b = ++i;
     std::cout << "After 'b = ++i':\n";
     std::cout << "b = " << b << " (i was incremented before being used)\n";
-    std::cout << "i = " << i << " (i is incremented before assignment)\n";
+    std::cout << "i = " << i << " (i is incremented before assignment)\n\n";
+
+    // Reset i for clarity
+    a = 3;
+    b = 5;
+    int c = a++ + b++ + ++a;
+    std::cout << "After 'c = ++a + b++ + a++':\n";
+    std::cout << "a = " << a << " (a was incremented twice)\n";
+    std::cout << "b = " << b << " (b was incremented after assignment)\n";
+    std::cout << "c = " << c << " \n";
 
     return 0;
 }
