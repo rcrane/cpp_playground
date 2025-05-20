@@ -1,0 +1,1 @@
+A little example showing the order of constructor and deconstructor executions with inheritance.
