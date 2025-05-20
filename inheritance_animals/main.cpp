@@ -2,11 +2,12 @@
 #include <string>
 
 class Animal {
+
 public:
   // **Member initializer list:**
   // `: name(n)`
   // Initialisiert die Member-Variable `name` mit dem Wert von `n`, bevor der Konstruktor-Body ausgeführt wird.
-  void Animal(const std::string &n) : name(n) {
+  Animal(const std::string &n) : name(n) {
     std::cout << "Animal constructor called for " << name << std::endl;
   }
 
