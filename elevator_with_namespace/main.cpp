@@ -23,6 +23,7 @@ int main() {
   do {
     cout << "\nEnter floor number to go to (or -1 to exit): ";
     cin >> floorRequest;
+    // ToDo: Error handling (char input, out of range, etc.)
 
     if (floorRequest == -1)
       break;
@@ -37,8 +38,11 @@ int main() {
     }
     cout << "Emergency elevator on floor: " << emergencyElevator.getCurrentFloor() << endl;
 
+    // ToDo: open the door of the main elevator
+
     cout << "Do you want to request another floor? (y/n): ";
     cin >> choice;
+
   } while (choice == 'y' || choice == 'Y');
 
   cout << "Thank you for using the Elevator Simulator!" << endl;

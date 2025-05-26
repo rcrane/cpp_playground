@@ -35,6 +35,8 @@ void Elevator::moveToFloor(int floor) {
   }
 }
 
+// Todo: Implement door opening functionality
+
 // Getter for the current floor
 int Elevator::getCurrentFloor() const {
   return currentFloor;
