@@ -35,6 +35,7 @@ int main() {
     // Beispiel: Pointer und const
     const int b = 42;
     const int* pc = &b; // Pointer auf const int
+    pc++; // Nur b ist konstant, pc kann verändert werden
     std::cout << "Wert von b über Pointer auf const int: " << *pc << std::endl;
 }
 
