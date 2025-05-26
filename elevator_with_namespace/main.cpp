@@ -1,36 +1,46 @@
 #include "elevator.h"
 
-int main()
-{
-    int minFloor = 0, maxFloor = 10;
-    // You can either qualify the name...
-    elev_namespace::Elevator myElevator(minFloor, maxFloor);
-    // or use a using directive:
-    // using namespace elev_namespace;
-    // Elevator myElevator(minFloor, maxFloor);
+int main() {
+  int minFloor = 0, maxFloor = 10;
 
-    int floorRequest;
-    char choice;
+  elev_namespace::Elevator mainElevator(minFloor, maxFloor);
+  elev_namespace::Elevator emergencyElevator(minFloor, maxFloor);
 
-    cout << "Welcome to the Elevator Simulator!" << endl;
-    cout << "Elevator range: floors " << minFloor << " to " << maxFloor << endl;
-    cout << "Current floor: " << myElevator.getCurrentFloor() << endl;
+  int floorRequest;
+  char choice;
 
-    do
-    {
-        cout << "\nEnter floor number to go to (or -1 to exit): ";
-        cin >> floorRequest;
+  cout << "Welcome to the Elevator Simulator!" << endl;
+  cout << "Elevator range: floors " << minFloor << " to " << maxFloor << endl;
+  cout << "Current floor: " << mainElevator.getCurrentFloor() << endl;
 
-        if (floorRequest == -1)
-            break;
+  // Demonstrate the use of 'this' pointer
+  mainElevator.printAddress();
+  emergencyElevator.printAddress();
 
-        myElevator.moveToFloor(floorRequest);
-        cout << "Current floor: " << myElevator.getCurrentFloor() << endl;
+  // Demonstrate the use of static variable
+  cout << "Number of Elevator instances: " << elev_namespace::Elevator::getElevatorCount() << endl;
 
-        cout << "Do you want to request another floor? (y/n): ";
-        cin >> choice;
-    } while (choice == 'y' || choice == 'Y');
+  do {
+    cout << "\nEnter floor number to go to (or -1 to exit): ";
+    cin >> floorRequest;
 
-    cout << "Thank you for using the Elevator Simulator!" << endl;
-    return 0;
+    if (floorRequest == -1)
+      break;
+
+    mainElevator.moveToFloor(floorRequest);
+    cout << "Main elevator on floor: " << mainElevator.getCurrentFloor() << endl;
+
+    if (floorRequest > maxFloor / 2 && emergencyElevator.getCurrentFloor() != minFloor) {
+        emergencyElevator.moveToFloor(minFloor);
+    }else if (floorRequest < maxFloor / 2 && emergencyElevator.getCurrentFloor() != maxFloor) {
+        emergencyElevator.moveToFloor(maxFloor);
+    }
+    cout << "Emergency elevator on floor: " << emergencyElevator.getCurrentFloor() << endl;
+
+    cout << "Do you want to request another floor? (y/n): ";
+    cin >> choice;
+  } while (choice == 'y' || choice == 'Y');
+
+  cout << "Thank you for using the Elevator Simulator!" << endl;
+  return 0;
 }
