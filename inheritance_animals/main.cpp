@@ -40,18 +40,7 @@ private:
   std::string name;
 };
 
-class Cat : public Animal {
-public:
-  Cat(const std::string &n) : Animal(n) {
-    std::cout << "Cat constructor called for " << getName() << std::endl;
-  }
-  ~Cat() override {
-    std::cout << "Cat destructor called for " << getName() << std::endl;
-  }
-  void makeSound() const override {
-    std::cout << getName() << " says: Meow!" << std::endl;
-  }
-};
+
 
 class Dog : public Animal {
 public:
@@ -88,29 +77,70 @@ public:
   // void makeSound() not implemented on purpose
 };
 
+
+
+class Cat : public Animal {
+public:
+  Cat(const std::string &n) : Animal(n) {
+    std::cout << "Cat constructor called for " << getName() << std::endl;
+  }
+  ~Cat() override {
+    std::cout << "Cat destructor called for " << getName() << std::endl;
+    mouse_->makeSound();
+  }
+  void makeSound() const override {
+    std::cout << getName() << " says: Meow!" << std::endl;
+  }
+
+  void caughtMouse(Animal* maus) {
+    mouse_ = maus;
+    std::cout << getName() << " caught a mouse!" << std::endl;
+  }
+
+private:
+  Animal* mouse_;
+};
+
 // Task: Create a class `Bird` that inherits from `Animal`
 // and implements the `makeSound` method to print that the bird sings.
 // class Bird
+class Bird : public Animal {
+public:
+  Bird(const std::string &n) : Animal(n) {
+    std::cout << "Bird constructor called for " << getName() << std::endl;
+  }
+  void makeSound(){
+    std::cout << getName() << " says: Piiep!" << std::endl;
+  }
+};
 
 int main() {
   // Creating objects of derived classes
   Animal *a1 = new Cat("Whiskers");
   Animal *a2 = new Dog("Buddy");
   Animal *a3 = new Mouse("Mini");
+  // Animal *a5 = new Mouse("Mini2");
+  // Animal *a4 = new Bird("Tweety");
+
   // Construct a bird here
 
   // Demonstrating polymorphism
   a1->makeSound();
-  a2->makeSound();
+  // a2->makeSound();
   a3->makeSound();
+  // a4->makeSound();
   // Let the bird sing here
 
+  ( (Cat*)a1 )->caughtMouse( a3 );
+  ( (Cat*)a1 )->caughtMouse( a2 );
+  // a1->caughtMouse(a3);
   // Without virtual destructor, only the base class destructor will be called
   // and the derived class destructor will not be called, leading to resource
   // leaks.
   delete a1;
-  delete a2;
+  // delete a2;
   delete a3;
+  // delete a4;
   // Don't forget the bird here
 
   return 0;
